@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>12 Cool Places to Eat in NYC</title>
+    <meta name="viewport" center-text="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="icon" type="image/png" href="images\favicon\favicon.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@500&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1 style="font-family: 'Kufam';"> 12 Cool Places to Eat in New York City </h1>
+    <p style="text-align:center;">Here are 12 awesome places to try if you're in NYC. From donuts & ice cream to casual dining to 5-star steakhouses, here are some of New Yorker's favorites.</p>
+
+    <div id="map-container" >
+      <div id='map'> </div>
+    </div>
+
+    <div class="container">
+      <h2>Featured Locations | Food Gallery</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="thumbnail">
+              <img src="images\katz.jpg" alt="Katz's Signature Pastrami on Rye" style="width:120%">
+              <div class="caption">
+                <p>Katz's Signature Pastrami on Rye</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="thumbnail">
+              <img src="images\keens.jpg" alt="Keens's Popular Steak" style="width:120%">
+              <div class="caption">
+                <p>Keens's Popular Steak</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="thumbnail">
+              <img src="images\dominique.jpg" alt="Dominique Ansels's Cookie Shot" style="width:120%">
+              <div class="caption">
+                <p>Dominique Ansels's Cookie Shot</p>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\sylvia.jpg" alt="Sylvias's Delicious Comfort Food" style="width:120%">
+            <div class="caption">
+              <p>Sylvias's Delicious Comfort Food</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\rays.jpg" alt="Ray's Signature Deep Fried Oreos" style="width:120%">
+            <div class="caption">
+              <p>Ray's Signature Deep Fried Oreos</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\milkflower.jpg" alt="Milkflower's Wood Oven Pizza" style="width:120%">
+            <div class="caption">
+              <p>Milkflower's Wood Oven Pizza</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\papayaking.jpg" alt="Papaya King's Famous Hotdogs" style="width:120%">
+            <div class="caption">
+              <p>Papaya King's Famous Hotdogs</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\peterpandonuts.jpg" alt="Peter Pan Donuts & Pastry's Deliciousness" style="width:120%">
+            <div class="caption">
+              <p>Peter Pan Donuts & Pastry's Deliciousness</p>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <img src="images\peterluger.jpg" alt="Peter Luger's Delicious Steak" style="width:120%">
+          <div class="caption">
+            <p>Peter Luger's Delicious Steak</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="images\ample.png" alt="Papaya King's Famous Hotdogs" style="width:120%">
+            <div class="caption">
+              <p>Ample Hill's Unique Ice Cream Flavors</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <img src="images\superiorityburger.jpg" alt="Peter Luger's Delicious Steak" style="width:120%">
+          <div class="caption">
+            <p>Superiority Burger's Are All Vegetarian</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <img src="images\halalguys.jpg" alt="Peter Luger's Delicious Steak" style="width:120%">
+          <div class="caption">
+            <p>The Halal Guys Providing Tasty Food Since '90</p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script>
+  	mapboxgl.accessToken = 'pk.eyJ1IjoibWF5YW5jZWxhIiwiYSI6ImNrZW15dndpbjBhNnYycW05dHRoeTNpM2UifQ.qxvnr-g9i_1rgUdqiA4JWw';
+      var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [-73.986470, 40.750751],
+          zoom: 11.50
+      });
+
+      //location array contains longitude, latitude format
+      var locations = [
+        [-73.987386],
+        [40.722343],
+        [-73.983296],
+        [40.726387],
+        [-74.002938],
+        [40.725226],
+        [-73.986472],
+        [40.750750],
+        [-73.954124],
+        [40.779039],
+        [-73.944543],
+        [40.808608],
+        [-73.962500],
+        [40.709861],
+        [-73.920791],
+        [40.762832],
+        [-73.952321],
+        [40.726070],
+        [-73.983516],
+        [40.727487],
+        [-73.938608],
+        [40.753593],
+        [-73.919126],
+        [40.765829]
+      ];
+
+      for(var i = 0; i < locations.length - 1; i++){
+        var marker = new mapboxgl.Marker()
+        .setLngLat([locations[i],locations[i+1]])
+        .addTo(map);
+      }
+      map.on('load', function() {
+        map.addSource('places', {
+          'type': 'geojson',
+          'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Katz\'s Delicatessen </strong><p> No-frills deli with theatrically cranky service serving mile-high sandwiches since 1888. </p> <p style="text-align:center;"><a href="https://katzsdelicatessen.com/" target="_blank" title="Opens in a new window">Visit Their Store</a> </p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [ -73.987386, 40.722343]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Ray\'s Candy Store</strong><p> Funky, colorful ice cream destination since 1974 also boasts egg creams, fries & hot dogs.</p> <p style="text-align:center;"><a href="http://rayscandystore.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.983296, 40.726387]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Dominique Ansel Bakery</strong><p>This bakery-cafe headed by pastry chef Dominique Ansel serves up creative & beautiful French treats.</p> <p style="text-align:center;"><a href="https://www.dominiqueansel.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-74.002938, 40.725226]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Keens Steakhouse</strong><p>Enormous steaks & signature mutton chops served in a maze of clubby, wood-paneled rooms.</p> <p style="text-align:center;"><a href="http://www.keens.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.986472, 40.750750]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Papaya King</strong><p>Counter-service eatery serving budget-friendly hot dogs & papaya drinks in a no-frills setting.</p> <p style="text-align:center;"><a href="https://papayaking.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.954124, 40.779039]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Sylvia\'s Restaurant</strong><p>Harlem landmark serving generous helpings of Southern comfort food since 1962.</p> <p style="text-align:center;"><a href="http://sylviasrestaurant.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.944543, 40.808608]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Peter Luger Steak House</strong><p>Cash-only steak icon where old-school waiters serve aged beef in a German beer hall setting.</p> <p style="text-align:center;"><a href="https://peterluger.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.962500, 40.709861]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Milkflower</strong><p>Hip, rustic choice for gourmet wood-fired pizzas, Italian small plates, salads & craft beers.</p> <p style="text-align:center;"><a href="http://www.milkflowernyc.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.920791, 40.762832]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Peter Pan Donut & Pastry Shop</strong><p>Old-school bakery with counter seating for donuts & pastries, plus shakes & egg creams.</p> <p style="text-align:center;"><a href="https://peterpandonuts.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.952321, 40.726070]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Superiority Burger</strong><p>Compact, all-vegetarian fast-food spot serving up popular burgers in white-tiled surroundings.</p> <p style="text-align:center;"><a href="http://www.superiorityburger.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.983516, 40.727487]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>The Halal Guys</strong><p>Serving Chicken, Gyros, and Falafel Platters. The Authentic American Halal Food. Since 1990.</p> <p style="text-align:center;"><a href="https://thehalalguys.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.938608, 40.753593]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                      'description':
+                          '<strong>Ample Hills Creamery Astoria</strong><p>Every day, we wake up hoping that today will be the day we make the best ice cream ever. </p> <p style="text-align:center;"><a href="https://www.amplehills.com/" target="_blank" title="Opens in a new window">Visit Their Store</a></p>',
+                      'icon': 'marker'
+                  },
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [-73.919126, 40.765829]
+                  }
+                }
+              ]
+            }
+          });
+
+      // Add a layer showing the places.
+      map.addLayer({
+        'id': 'places',
+        'type': 'symbol',
+        'source': 'places',
+        'layout': {
+          'icon-image': '{icon}-15',
+          'icon-allow-overlap': true
+        }
+      });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      map.on('click', 'places', function(e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', function() {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', function() {
+          map.getCanvas().style.cursor = '';
+        });
+      });
+    </script>
+  </body>
+</html>
